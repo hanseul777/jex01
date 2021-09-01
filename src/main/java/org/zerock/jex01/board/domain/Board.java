@@ -5,7 +5,7 @@ import org.zerock.jex01.board.dto.BoardDTO;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Getter //Board는 읽기전용클래스
 @ToString
 @Builder
 @AllArgsConstructor

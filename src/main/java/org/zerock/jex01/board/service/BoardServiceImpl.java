@@ -41,6 +41,7 @@ public class BoardServiceImpl implements BoardService{
         if(board != null){
             return board.getDTO();
         }
+        //return board != null? board.getDTO(): null; //if문을 삼항연산자로 변경
         return null;
     }
 

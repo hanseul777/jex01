@@ -23,7 +23,7 @@ public class BoardController {
     private final BoardService boardService; //postMapping에서 사용
 
     @GetMapping("/time") //-> /board/time
-    public void getTime(int num,Model model){
+    public void getTime(int num,Model model){ //에러처리 확인 -> int numm 추가
         log.info("==================controller getTime===================");
         log.info(num % 0);
         model.addAttribute("time", timeService.getNow());
@@ -44,6 +44,7 @@ public class BoardController {
 
         log.info("==================c              registerPost=========================");
         log.info(bno);
+
         redirectAttributes.addFlashAttribute("result",bno);
 
         return "redirect:/board/list"; // 리다이렉트 했을 때 새롭게 생성한 bno번호를보고 싶음 -> mybatis설정
@@ -69,7 +70,7 @@ public class BoardController {
 
         if(boardService.remove(bno)){
             log.info("remove success");
-            redirectAttributes.addFlashAttribute("result", "success");
+            redirectAttributes.addFlashAttribute("result", "success"); //개발자도구로 console창 확인을 위해 success를 넣어줌 -> 실행확인
         }
         return "redirect:/board/list";
    }

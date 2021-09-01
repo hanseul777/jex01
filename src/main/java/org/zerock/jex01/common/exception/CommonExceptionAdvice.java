@@ -14,6 +14,7 @@ public class CommonExceptionAdvice {
 //코드문제 -> 500 / 서버(URL)쪽 문제 -> 404 : web.xml(=webConfig)확인
     @ExceptionHandler(Exception.class) //괄호안에 어떤 종류의 예외가 발생하면 이 메서드를 실행할거야
     //직접 에러처리를 해주지않아도 알아서 처리해준다. -> 에러가 발생하면 exception 클래스로 가는 것
+    // Model -> 데이터를 담아서 보내는 역할 (request.setAttribute의 역할을 대신한다)
     public String exceptAll(Exception ex, Model model){
 
         log.error(ex.getClass().getName());

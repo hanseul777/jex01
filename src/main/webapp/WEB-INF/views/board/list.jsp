@@ -52,7 +52,6 @@
                                         <td><c:out value="${dto.title}"></c:out></td>
                                         <td><c:out value="${dto.writer}"></c:out></td>
                                         <td><c:out value="${dto.regDate}"></c:out></td>
-                                        <td><span class="badge bg-danger">55%</span></td>
                                     </tr>
                                     </c:forEach>
                                     </tbody>
