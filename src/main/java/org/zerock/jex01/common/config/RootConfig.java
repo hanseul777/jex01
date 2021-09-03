@@ -31,8 +31,11 @@ public class RootConfig {
     //싱글톤이라 한 번밖에 로딩안함. (예전에 쓰던 enum같은 것)
     public DataSource dataSource(){
         HikariConfig config = new HikariConfig(); // hikariCP 사용
-        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        config.setJdbcUrl("jdbc:mysql://localhost:3306/springdb");
+//        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        config.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
+
+//        config.setJdbcUrl("jdbc:mysql://localhost:3306/springdb");
+        config.setJdbcUrl("jdbc:log4jdbc:mysql://localhost:3306/springdb");
         config.setUsername("springuser");
         config.setPassword("springuser");
 

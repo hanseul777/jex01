@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import org.zerock.jex01.board.domain.Board;
 import org.zerock.jex01.board.dto.BoardDTO;
 import org.zerock.jex01.board.mapper.BoardMapper;
+import org.zerock.jex01.common.dto.PageRequestDTO;
+import org.zerock.jex01.common.dto.PageResponseDTO;
+import sun.jvm.hotspot.debugger.Page;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,10 +31,20 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<BoardDTO> getDTOList() {
+    public PageResponseDTO<BoardDTO> getDTOList(PageRequestDTO pageRequestDTO) {
 
-        //boardMapper에서 가지고온 List를 한 번에 처리 (entity를 DTO로 바꾸는 기능이 필요한 것 -> function도 이용가능함)
-       return boardMapper.getList().stream().map(board -> board.getDTO()).collect(Collectors.toList());
+        //boardMapper에서 가지고온 List를 한 번에 불러와서 처리
+        //url에 파라미터를 주지 않으면 -> 무조건 1과 10으로 출력
+       List<BoardDTO> dtoList = boardMapper.getList(pageRequestDTO).stream().map(board -> board.getDTO()).collect(Collectors.toList());
+        int count = boardMapper.getCount(pageRequestDTO);
+
+        PageResponseDTO<BoardDTO> pageResponseDTO = PageResponseDTO.<BoardDTO>builder()
+                .dtoList(dtoList)
+                .count(count)
+                .build();
+
+        return pageResponseDTO;
+
     }
 
     @Override

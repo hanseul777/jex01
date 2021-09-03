@@ -1,6 +1,8 @@
 package org.zerock.jex01.board.service;
 
 import org.zerock.jex01.board.dto.BoardDTO;
+import org.zerock.jex01.common.dto.PageRequestDTO;
+import org.zerock.jex01.common.dto.PageResponseDTO;
 
 import java.util.List;
 
@@ -10,7 +12,9 @@ public interface BoardService {
     Long register(BoardDTO boardDTO);
 
     //서비스계층은 항상 dto로 주고받음 : 파라미터를 받을 때도 리턴값도 dto -> requestDTO와 responseDTO를 나눌 수는 있음
-    List<BoardDTO> getDTOList();
+
+//    List<BoardDTO> getDTOList(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<BoardDTO> getDTOList(PageRequestDTO pageRequestDTO);
 
     BoardDTO read(Long bno);
 

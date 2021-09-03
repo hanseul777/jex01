@@ -1,6 +1,7 @@
 package org.zerock.jex01.board.mapper;
 
 import org.zerock.jex01.board.domain.Board;
+import org.zerock.jex01.common.dto.PageRequestDTO;
 
 import java.util.List;
 
@@ -9,7 +10,10 @@ public interface BoardMapper {
     //@insert로 만들지 말기 -> xml로 빠짐
     void insert(Board board);
 
-    List<Board> getList(); //첫버전은 페이징처리없어서 파라미터 없음
+//    List<Board> getList(); //첫버전은 페이징처리없어서 파라미터 없음
+    List<Board> getList(PageRequestDTO pageRequestDTO);
+
+    int getCount(PageRequestDTO pageRequestDTO);
 
     Board select (Long bno);
 

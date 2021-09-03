@@ -5,6 +5,22 @@
 
 <mapper namespace="org.zerock.jex01.board.mapper.BoardMapper"><!--namespace : 패키지명이랑 맞춰주기  namespace + id = 풀네임-->
 
+    <sql id="search">
+        <if test="type != null">
+        <foreach collection="arr" item="item" separator=" OR " open="WHERE (" close=")">
+            <if test="item == 'T'.toString()">
+                title like concat('%',#{keyword},'%')
+            </if>
+            <if test="item == 'C'.toString()">
+                content like concat('%',#{keyword},'%')
+            </if>
+            <if test="item == 'W'.toString()">
+                writer like concat('%',#{keyword},'%')
+            </if>
+        </foreach>
+        </if>
+    </sql>
+
     <insert id="insert">
         insert tbl_board (title,content,writer)
         values (#{title},#{content},#{writer})
@@ -14,7 +30,15 @@
     </insert>
 
     <select id="getList" resultType="org.zerock.jex01.board.domain.Board">
-        select * from tbl_board order by bno desc limit 0,100
+        select * from tbl_board
+        <include refid="search"></include>
+        order by bno desc limit #{skip},#{size} <!--mybatis는 getter setter를 먼저 찾음 : getSkip 생성-->
+    </select>
+
+
+    <select id="getCount" resultType="int">
+        select count(bno) from tbl_board
+        <include refid="search"></include>
     </select>
 
     <select id="select" resultType="org.zerock.jex01.board.domain.Board">

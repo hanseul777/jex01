@@ -33,7 +33,14 @@
                             <h3 class="card-title">Board Modify</h3>
                         </div>
                         <!-- /.card-header -->
-                        <form id="form1">
+                        <form id="form1"> <!--실제로 전송되는 부분 -->
+                            <input type="hidden" name="page" value="${pageRequestDTO.page}">
+                            <input type="hidden" name="size" value="${pageRequestDTO.size}"><!--hidden으로 추가해서 page와 size도 한 번에 날림-->
+
+                            <c:if test="${pageRequestDTO.type != null}">
+                                <input type="hidden" name="type" value="${pageRequestDTO.type}">
+                                <input type="hidden" name="keyword" value="${pageRequestDTO.keyword}">
+                            </c:if>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail0">BNO</label>
@@ -71,28 +78,34 @@
         </div>
     </section>
 </div>
+
+<form id="actionForm" action="/board/list" method="get">
+    <input type="hidden" name="page" value="${pageRequestDTO.page}">
+    <input type="hidden" name="size" value="${pageRequestDTO.size}">
+
+    <c:if test="${pageRequestDTO.type != null}">
+        <input type="hidden" name="type" value="${pageRequestDTO.type}">
+        <input type="hidden" name="keyword" value="${pageRequestDTO.keyword}">
+    </c:if>
+</form>
+
 <%@include file="../includes/footer.jsp"%>
 
 <script>
     const form = document.querySelector("#form1")
+    const actionForm = document.querySelector("#actionForm")
 
     document.querySelector(".btnList").addEventListener("click", (e) => {
         e.preventDefault()
         e.stopPropagation()
 
-        window.location = "/board/list"
-
         // form.setAttribute("action","/board/list")
         // form.setAttribute("method","get")
-        //
-        // const arr = form.querySelectorAll(".form-group");
-        //
-        // for(let i=0; i <arr.length; i++){
-        //     arr[i].remove()
-        // }
-        // form.submit()
 
-        },false)
+        // window.location = "/board/list"
+
+        actionForm.submit();
+    },false)
 
     document.querySelector(".btnDel").addEventListener("click", (e) => {
         e.preventDefault()
