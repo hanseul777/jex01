@@ -70,7 +70,7 @@ public class BoardController {
         model.addAttribute("pageMaker", new PageMaker(page,size,total));
     }
 
-    @GetMapping(value = {"/read","/modify"})
+    @GetMapping(value = {"/read","/modify","/read2"})
     //파라미터 수집 자동으로 해줌 -> 바로 입력해도 상관없음
     //pageRequestDTO를 생성해서 파라미터를 더 많이 받을 수 있음(커스터마이징이 가능함)
     public void read(Long bno, PageRequestDTO pageRequestDTO, Model model) {
