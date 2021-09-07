@@ -5,10 +5,10 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.zerock.jex01.board.config.BoardRootConfig;
 
 import javax.sql.DataSource;
@@ -17,6 +17,8 @@ import java.util.ArrayList;
 //내부적인 부분 : Component / 외부적인 부분 : Configuration
 @Configuration //걸자마자 옆에 bean표시가 생김, 자바소스를 빈으로 만들어주는 태그
 @Import(BoardRootConfig.class) // 로딩할 때 해당클래스를 같이 로딩해줌
+//@EnableAspectJAutoProxy
+@EnableTransactionManagement// transaction이 가능하도록 걸어줌
 public class RootConfig {
 
     @Bean //mybatis 연결
@@ -42,6 +44,12 @@ public class RootConfig {
         HikariDataSource dataSource = new HikariDataSource(config);
 
         return dataSource;
+    }
+
+    //transaction
+    @Bean
+    public TransactionManager transactionManager(){
+        return new DataSourceTransactionManager(dataSource());
     }
 
     // 소스코드가 없어서 직접사용을 못하고 @Bean을 이용해서 객체를 생성 / 예전에 xml로 설정했던 것을 메서드로 만들고 @Bean을 걸어서 객체로 생성해줌

@@ -159,6 +159,10 @@
 
     //doE(reply).then(result => console.log(result))
 
+    getReplyList(bno).then(data => {
+        console.log(data)
+        let str = ""
+    })
 
 </script>
 

@@ -53,4 +53,8 @@
     update tbl_board set title = #{title}, content = #{content}, modDate = now()
     where bno = #{bno}
     </update>
+
+    <update id="updateReplyCnt">
+        update tbl_board set replyCnt = replyCnt + #{num} where bno = #{bno}
+    </update>
 </mapper>

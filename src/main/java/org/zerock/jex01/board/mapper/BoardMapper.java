@@ -1,5 +1,6 @@
 package org.zerock.jex01.board.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.zerock.jex01.board.domain.Board;
 import org.zerock.jex01.common.dto.PageRequestDTO;
 
@@ -21,4 +22,6 @@ public interface BoardMapper {
 
     int update(Board board);
 
+    //mybatis는 기본적으로 파라미터의 수가 하나밖에 안들어감. : map을 만들어서 처리 or DTO로 처리 or param 어노테이션을 이용
+    int updateReplyCnt(@Param("bno") Long bno, @Param("num") int num);
 }
