@@ -28,6 +28,8 @@ public class UploadController {
     @ResponseBody
     @PostMapping("/removeFile")
     public ResponseEntity<String> removeFile(@RequestBody Map<String,String> data)throws Exception{
+        //axios가 JSON(키,값으로 구성되어있음)으로 가져와야 해서 실제 filename을 보내는데 단순문자열로 받을 수가 없어서 키,값으로 구성되어있는 Map을 임시로 생성해서
+        // 원래는 DTO를 생성해서 파라미터로 던져야 하는데 Map을 임시로 생성해서 간편하게 사용한다.
 
         // 2021/09/08/
         File file = new File("/Users/hanseul/upload"+ File.separator+ data.get("fileName"));
@@ -73,7 +75,7 @@ public class UploadController {
 
         log.info(file); //파일존재여부 확인
 
-        //파일이 존재하는지 여부를 확인(p.526 : 컨텐츠타입이 매번 달라져야함 -> 헤더메세지를 조작해주기 위해서 ResponseEntity<byte[]> 사용
+        //파일이 존재하는지 여부를 확인(p.526 : 컨텐츠타입이 매번 달라짐 -> 헤더메세지를 조작해주기 위해서 ResponseEntity<byte[]> 사용
         ResponseEntity<byte[]> result = null;
 
         //한번에 바이트배열로 바꿔주는 것 -> 바이트의 배열로 카피

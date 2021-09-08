@@ -127,7 +127,8 @@
                     str += `<div data-uuid='\${uuid}' data-filename='\${fileName}' data-uploadpath='\${uploadPath}' data-image='\${image}'><img src='/viewFile?file=\${thumbnail}'/><span>\${fileName}</span>
                             <button onclick="javascript:removeFile('\${fileLink}',this)">X</button></div>`
                 }else {
-                    str += `<div data-uuid='\${uuid}'data-filename='\${fileName}' data-uploadpath='\${uploadPath}' data-image='\${image}'><a href='/downFile?file=\${fileLink}'>\${fileName}</a></div>`
+                    str += `<div data-uuid='\${uuid}'data-filename='\${fileName}' data-uploadpath='\${uploadPath}' data-image='\${image}'><a href='/downFile?file=\${fileLink}'>\${fileName}</a>
+                            <button onclick="javascript:removeFile('\${fileLink}',this)">X</button></div>`
                 }
             }
             //기존을 유지하면서 str을 추가한다

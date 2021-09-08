@@ -27,6 +27,7 @@ public class BoardDTO {
     private LocalDateTime regDate;
     private LocalDateTime modDate;
 
+    //첨부파일을 넣을 공간을 생성해줌
     @Builder.Default
     private List<UploadResponseDTO> files = new ArrayList<>(); //ArryList초기화하려고 Builder 사용
 
