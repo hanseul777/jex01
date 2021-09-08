@@ -6,8 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.zerock.jex01.board.domain.Board;
+import org.zerock.jex01.board.domain.BoardAttach;
+import org.zerock.jex01.common.dto.UploadResponseDTO;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -23,6 +27,9 @@ public class BoardDTO {
     private LocalDateTime regDate;
     private LocalDateTime modDate;
 
+    @Builder.Default
+    private List<UploadResponseDTO> files = new ArrayList<>(); //ArryList초기화하려고 Builder 사용
+
     public Board getDomain(){
         Board board = Board.builder()
                 .bno(bno)
@@ -32,6 +39,18 @@ public class BoardDTO {
                 .regDate(regDate)
                 .modDate(modDate)
                 .build(); //화면에 있는 데이터와 데이터베이스에 있는 구조가 다를 때 필요함
+
+        files.forEach(uploadResponseDTO -> {
+            BoardAttach attach = BoardAttach.builder()
+                    .fileName(uploadResponseDTO.getFileName())
+                    .uuid(uploadResponseDTO.getUuid())
+                    .image(uploadResponseDTO.isImage())
+                    .path(uploadResponseDTO.getUploadPath())
+                    .build();
+
+            board.addAttach(attach); // 객체안에 객체를 넣어줘야 한다.
+        });
+
         return board;
     }
 }

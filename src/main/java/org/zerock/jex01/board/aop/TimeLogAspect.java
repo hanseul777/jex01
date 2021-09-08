@@ -24,6 +24,7 @@ public class TimeLogAspect {
         log.info("TimeLogAspect.......................");
     }
 
+    //메서드 실행 전에 적용
     @Before("execution(* org.zerock.jex01.board.service.*.*(..))") // 이 기능을 누구랑 합칠겨나를 말해주는 것(치킨이랑? 족발이랑?
     // .*.*(..) : * -> 모든 클래스 / (..) -> 모든메서드
 //    public void logBefore(){ // 냄새없는 포장

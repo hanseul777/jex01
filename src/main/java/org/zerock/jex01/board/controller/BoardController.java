@@ -42,6 +42,7 @@ public class BoardController {
 
         log.info("boardDTOM           " + boardDTO);
 
+//        Long bno = 111L;
         Long bno = boardService.register(boardDTO);
 
         log.info("==================c              registerPost=========================");

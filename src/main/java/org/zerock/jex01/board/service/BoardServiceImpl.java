@@ -27,6 +27,13 @@ public class BoardServiceImpl implements BoardService{
 
         boardMapper.insert(board);
 
+        Long bno = board.getBno();
+
+        board.getAttachList().forEach(attach -> {
+            attach.setBno(bno);
+            boardMapper.insertAttach(attach);
+        });
+
         return board.getBno();
     }
 
