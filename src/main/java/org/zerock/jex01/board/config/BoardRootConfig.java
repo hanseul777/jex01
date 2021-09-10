@@ -5,6 +5,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+//server쪽 설정
+
 @Configuration //자바코드로 bean생성
 @MapperScan(basePackages = "org.zerock.jex01.board.mapper")
 @ComponentScan(basePackages = "org.zerock.jex01.board.service")

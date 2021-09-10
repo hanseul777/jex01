@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 @Aspect
 @Log4j2
-@Component//spring의 bean으로 등록
+@Component//직접개발한 클래스를 Bean으로 등록하고자 하는 것
 public class TimeLogAspect {
 
     {//객체가 생성되자마자 실행하기 위해서 디폴트블록으로 만들어 준다.(거의 사용하지않음)
@@ -37,7 +37,7 @@ public class TimeLogAspect {
         log.info("logBefore...............END");
     }
 
-    @AfterReturning("execution(* org.zerock.jex01.board.service.*.*(..))") // 이 기능을 누구랑 합칠겨나를 말해주는 것(치킨이랑? 족발이랑?
+    @AfterReturning("execution(* org.zerock.jex01.board.service.*.*(..))") // 이 기능을 누구랑 합칠겨나를 말해주는 것 : pointcut 설정
     public void logAfter(){
         log.info("logAfter................");
     }

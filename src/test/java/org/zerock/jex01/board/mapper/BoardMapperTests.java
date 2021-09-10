@@ -64,7 +64,12 @@ public class BoardMapperTests {
 
     @Test
     public void testSelect(){
-        log.info(boardMapper.select(219L));
+
+        Board board = boardMapper.select(227L);
+
+        log.info("-----------------------------------------------------");
+        log.info(board);
+        board.getAttachList().forEach(attach -> log.info(attach));
     }
 
     @Test

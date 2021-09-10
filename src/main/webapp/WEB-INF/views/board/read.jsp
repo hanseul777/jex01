@@ -65,6 +65,17 @@
                             <button type="button" class="btn btn-info btnMod">MODIFY</button>
                         </div>
 
+                        <div>
+                            <c:forEach items="${boardDTO.files}" var="attach">
+                                <div>
+                                        <c:if test="${attach.image}">
+                                            <img onclick="javascript:showOrigin('${attach.getFileLink()}')" src="/viewFile?file=${attach.getThumbnail()}">
+                                        </c:if>
+                                        ${attach.fileName}
+                                </div>
+                            </c:forEach>
+                        </div>
+
                     </div>
                     <!-- /.card -->
                     <div class="card direct-chat direct-chat-primary">
@@ -159,6 +170,22 @@
 </div>
 <!-- /.modal -->
 
+<div class="modal fade" id="modal-imge">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="targetImage">
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <%@include file="../includes/footer.jsp"%>
 
 <script>
@@ -180,6 +207,14 @@
 <script src="/resources/js/reply.js"></script>
 
 <script>
+
+    const modalImage = new bootstrap.Modal(document.querySelector("#modal-imge"))
+
+    function showOrigin(fileLink){
+        // alert(fileLink);
+        document.querySelector("#targetImage").src = `/viewFile?file=\${fileLink}`
+        modalImage.show()
+    }
 
     function after(result){
         console.log("after............")

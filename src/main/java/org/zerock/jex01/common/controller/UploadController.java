@@ -50,7 +50,7 @@ public class UploadController {
     @GetMapping("/downFile")
     public ResponseEntity<byte[]> download(@RequestParam("file") String fileName)throws Exception{
 
-        File file = new File("/Users/hanseul/upload" + File.separator + fileName);
+        File file = new File("/Users/hanseul/upload"+File.separator+fileName);
 
         String originalFileName = fileName.substring(fileName.indexOf("_") + 1);
 
@@ -133,7 +133,7 @@ public class UploadController {
         String uuid = UUID.randomUUID().toString();
         String originalFileName = fileName;
 
-        fileName = uuid +"_" + fileName;
+        fileName = uuid+"_"+fileName;
 
         File savedFile = new File(uploadPath+File.separator+folderName ,fileName);
         FileCopyUtils.copy(multipartFile.getBytes(),savedFile); //여기까지 오면 파일의 저장이 끝나는 것.

@@ -96,7 +96,16 @@ public class BoardController {
 
    @PostMapping("/modify")
     public String modify(BoardDTO boardDTO, PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes){
-        log.info("c              modify : " + boardDTO);
+       log.info("c              modify : " + boardDTO);
+       log.info("-------------------------------------");
+       log.info("-------------------------------------");
+       log.info(boardDTO); //데이터수집확인하
+       if(boardDTO.getFiles().size() > 0){
+           boardDTO.getFiles().forEach(dto -> log.info(dto));
+       }
+       log.info("-------------------------------------");
+       log.info("-------------------------------------");
+
         if(boardService.modify(boardDTO)){
             redirectAttributes.addFlashAttribute("result","modified");
         }

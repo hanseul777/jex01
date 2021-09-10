@@ -26,6 +26,7 @@ public class BoardDTO {
     private String writer;
     private LocalDateTime regDate;
     private LocalDateTime modDate;
+    private int replyCnt;
 
     //첨부파일을 넣을 공간을 생성해줌
     @Builder.Default

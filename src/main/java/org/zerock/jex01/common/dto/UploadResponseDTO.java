@@ -18,11 +18,11 @@ public class UploadResponseDTO {
     private String uploadPath;
 
     public String getThumbnail(){
-        return uploadPath + "/s_" + uuid + "_" + fileName;
+        return uploadPath+"/s_"+uuid+"_"+fileName;
     }
 
     public String getFileLink(){
-        return uploadPath + "/" + uuid + "_" + fileName;
+        return uploadPath+"/"+uuid+"_"+fileName;
     }
 
 }
