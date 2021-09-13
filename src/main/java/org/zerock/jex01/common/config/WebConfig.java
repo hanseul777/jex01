@@ -51,7 +51,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
     //404에러 (찾을 수 없는 URL을 입력했을 때 custom404.jsp로 가도록 해줌)
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        registration.setInitParameter("throwExceptionIfNoHandlerFound","true");
+        registration.setInitParameter("throwExceptionIfNoHandlerFound","true"); // 실질적으로 404가 처리되는 부분
 
         MultipartConfigElement multipartConfigElement //해당경로에 저장하는데 저장할 수 있는 조건을 준다.
                 = new MultipartConfigElement("/Users/hanseul/upload",1024*1024*10, 1024*1024*20, 1024*1024*1);
