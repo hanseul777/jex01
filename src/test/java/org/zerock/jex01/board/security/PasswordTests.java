@@ -9,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.jex01.common.config.RootConfig;
 import org.zerock.jex01.security.config.SecurityConfig;
+import org.zerock.jex01.security.domain.Member;
+import org.zerock.jex01.security.mapper.MemberMapper;
 
 @Log4j2
 @ExtendWith(SpringExtension.class)
@@ -17,6 +19,28 @@ public class PasswordTests {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired(required = false)
+    MemberMapper memberMapper;
+
+    @Test
+    public void testMember(){
+
+        try {
+
+            log.warn("-------------------------------");
+            log.warn(memberMapper);
+
+            String mid = "admin0";
+
+            Member member = memberMapper.findByMid(mid);
+
+            log.warn("--------------------------------");
+            log.warn(member);
+        }catch(Exception e ){
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void testEncode(){
@@ -65,7 +89,7 @@ public class PasswordTests {
         for(int i = 0; i < 10; i++){
             String mid = "admin"+i; //user0
             String mpw = passwordEncoder.encode("pw"+i);//pw0 -> 암호화(Bcrypt 된 암호화를 사용)
-            String mname = "관리자"+i; //유저0
+            String mname = "관리자"+i; //관리자0
 
             String result = query;
 
@@ -77,4 +101,30 @@ public class PasswordTests {
 
         }
     }
+    @Test
+    public void inserMemberRole(){
+        String sql = "insert into tbl_member_role (mid,role) values ('%s','%s');";
+        //sql뽑아서 바로 사용할거라서 ;붙이기
+
+        for(int i = 0; i<10; i++){
+            String result = String.format(sql, "user"+i, "ROLE_MEMBER");
+
+            System.out.println(result);
+        }
+    }
+
+    @Test
+    public void insertAdminRole(){
+        String sql = "insert into tbl_member_role (mid,role) values ('%s','%s');";
+        //sql뽑아서 바로 사용할거라서 ;붙이기
+
+        for(int i = 0; i<10; i++){
+            String result = String.format(sql, "admin"+i, "ROLE_MEMBER");
+            System.out.println(result);
+
+            String result2 = String.format(sql, "admin"+i, "ROLE_ADMIN");
+            System.out.println(result2);
+        }
+    }
 }
+

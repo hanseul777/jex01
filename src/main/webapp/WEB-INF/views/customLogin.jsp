@@ -34,7 +34,7 @@
 
       <form action="/login" method="post">
         <div class="input-group mb-3">
-          <input type="text" name="username" class="form-control" placeholder="username">
+          <input type="text" name="username" class="form-control" placeholder="username"><!--id지정-->
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -42,18 +42,18 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control" placeholder="Password"><!--pw지정-->
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
-          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"><!--csrf토큰주기-->
         </div>
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="remember">
+              <input type="checkbox" id="remember" name="remember-me">
               <label for="remember">
                 Remember Me
               </label>
