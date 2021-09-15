@@ -2,6 +2,7 @@ package org.zerock.jex01.board.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class BoardController {
         model.addAttribute("time", timeService.getNow());
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/register")
     public void registerGet(){ //항상 똑같은 페이지  -> void
         //자동으로 해당하는 jsp로 감
@@ -71,6 +73,7 @@ public class BoardController {
         model.addAttribute("pageMaker", new PageMaker(page,size,total));
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping(value = {"/read","/modify","/read2"})
     //파라미터 수집 자동으로 해줌 -> 바로 입력해도 상관없음
     //pageRequestDTO를 생성해서 파라미터를 더 많이 받을 수 있음(커스터마이징이 가능함)
@@ -94,6 +97,7 @@ public class BoardController {
         return "redirect:/board/list";
    }
 
+   @PreAuthorize("principal.mid == #boardDTO.writer") //파라미터boardDTO에서 가져오는건 #사용
    @PostMapping("/modify")
     public String modify(BoardDTO boardDTO, PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes){
        log.info("c              modify : " + boardDTO);

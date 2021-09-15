@@ -3,6 +3,7 @@ package org.zerock.jex01.board.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Lookup;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.zerock.jex01.board.domain.Reply;
 import org.zerock.jex01.board.dto.ReplyDTO;
@@ -31,6 +32,7 @@ public class ReplyController {
         return new String[]{"AAA","BBB","CCC"};
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("")
     // JSON으로 보낸다 -> JSON으로 데이터를 보내는데 이거를 자바의 객체(DTO)로 변경해 줘야 한다. : @RequestBody의 역할
     public int add(@RequestBody ReplyDTO replyDTO){

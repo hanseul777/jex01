@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.zerock.jex01.security.domain.Member;
+import org.zerock.jex01.security.dto.MemberDTO;
 import org.zerock.jex01.security.mapper.MemberMapper;
 
 import java.util.stream.Collectors;
@@ -44,15 +45,16 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         //새로운 String의 배열을 만들어 주는 것
-        String[] authorities = member.getRoleList().stream().map(memberRole -> memberRole.getRole()).toArray(String[]::new);
+//        String[] authorities = member.getRoleList().stream().map(memberRole -> memberRole.getRole()).toArray(String[]::new);
 
-        User result = (User) User.builder()
-                .username(username)
-                .password(member.getMpw())
-                .accountExpired(false)//만료된계정이야?
-                .accountLocked(false)//잠긴계정이야?
-                .authorities(authorities)// 권한뭐야?-> ROLE_을 붙여서 명시적으로 권한을 줘야한다.
-                .build(); //다운캐스팅해주기
+        User result = new MemberDTO(member); //memberDTO에 member를 넣으면 그 타입을 바꿔주는 것
+//        User result = (User) User.builder()
+//                .username(username)
+//                .password(member.getMpw())
+//                .accountExpired(false)//만료된계정이야?
+//                .accountLocked(false)//잠긴계정이야?
+//                .authorities(authorities)// 권한뭐야?-> ROLE_을 붙여서 명시적으로 권한을 줘야한다.
+//                .build(); //다운캐스팅해주기
 
 //        return null; // 반환 없음 : 무조건 로그인 안되게 하는 것
         return result;
