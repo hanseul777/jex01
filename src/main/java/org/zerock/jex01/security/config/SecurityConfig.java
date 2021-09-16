@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.zerock.jex01.security.handler.CustomAccessDeniedHandler;
+import org.zerock.jex01.security.handler.CustomAuthenticationEntryPoint;
 import org.zerock.jex01.security.handler.CustomLoginSuccessHandler;
 import org.zerock.jex01.security.service.CustomUserDetailsService;
 
@@ -62,12 +63,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .key("zerock")//암호화 된 문자열을 만들어주는데 그 때 뭘 사용할건지 지정
                 .tokenValiditySeconds(60*60*24*30); //한달
 
-        http.exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
+//        http.exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
+
+        http.exceptionHandling()
+                .authenticationEntryPoint(customAuthenticationEntryPoint());
     }
 
     @Bean
     public CustomAccessDeniedHandler customAccessDeniedHandler(){
         return new CustomAccessDeniedHandler();
+    }
+
+    @Bean
+    public CustomAuthenticationEntryPoint customAuthenticationEntryPoint(){
+        return new CustomAuthenticationEntryPoint(); //많은 인증에러를 거의 다 잡아낸다.
     }
 
     @Bean
