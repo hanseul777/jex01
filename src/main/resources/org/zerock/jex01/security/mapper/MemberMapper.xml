@@ -21,7 +21,7 @@
 
     <select id="findByMid" resultMap="memberMap">
         select * from tbl_member m inner join tbl_member_role tmr on m.mid = tmr.mid
-        where m.mid = #{mid};
+        where m.mid = #{mid}
     </select>
 
 </mapper>

@@ -35,7 +35,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Bordered Table</h3>
                             <sec:authorize access="isAuthenticated()">
-                            <button><a href="/board/register">register</a> </button>
+                                <button><a href="/board/register">register</a> </button>
                             </sec:authorize>
                         </div>
                         <!-- /.card-header -->
@@ -64,25 +64,25 @@
                             <form action="/board/list" method="get">
                                 <input type="hidden" name="page" value="1"> <!--검색버튼 누르면 무조건 1페이지로 보냄 -->
                                 <input type="hidden" name="size" value="${pageMaker.size}">
-                            <div class="col-sm-3">
-                                <!-- select -->
-                                <div class="form-group">
-                                    <label>Search</label>
-                                    <select name="type" class="custom-select"><!--type -->
-                                        <option value="">----</option> <!--검색조건 없을 떄 -->
-                                        <option value="T" ${pageRequestDTO.type=="T"?"selected":""}>제목</option>
-                                        <option value="TC" ${pageRequestDTO.type=="TC"?"selected":""}>제목내용</option>
-                                        <option value="C" ${pageRequestDTO.type=="C"?"selected":""}>내용</option>
-                                        <option value="TCW" ${pageRequestDTO.type=="TCW"?"selected":""}>제목 내용 작성자</option>
-                                    </select>
+                                <div class="col-sm-3">
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <label>Search</label>
+                                        <select name="type" class="custom-select"><!--type -->
+                                            <option value="">----</option> <!--검색조건 없을 떄 -->
+                                            <option value="T" ${pageRequestDTO.type=="T"?"selected":""}>제목</option>
+                                            <option value="TC" ${pageRequestDTO.type=="TC"?"selected":""}>제목내용</option>
+                                            <option value="C" ${pageRequestDTO.type=="C"?"selected":""}>내용</option>
+                                            <option value="TCW" ${pageRequestDTO.type=="TCW"?"selected":""}>제목 내용 작성자</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control" name="keyword" value="${pageRequestDTO.keyword}"> <!--keyword-->
-                                    <span class="input-group-append"><button type="submit" class="btn btn-info btn-flat">Go!</button></span>
-                                </div>
-                            </div><!--버튼누리면 name=type과 name=keyword가 같이 날아가야한다. -->
+                                <div class="col-sm-9">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control" name="keyword" value="${pageRequestDTO.keyword}"> <!--keyword-->
+                                        <span class="input-group-append"><button type="submit" class="btn btn-info btn-flat">Go!</button></span>
+                                    </div>
+                                </div><!--버튼누리면 name=type과 name=keyword가 같이 날아가야한다. -->
                             </form>
 
                         </div>

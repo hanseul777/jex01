@@ -102,7 +102,7 @@ public class PasswordTests {
         }
     }
     @Test
-    public void inserMemberRole(){
+    public void insertMemberRole(){
         String sql = "insert into tbl_member_role (mid,role) values ('%s','%s');";
         //sql뽑아서 바로 사용할거라서 ;붙이기
 

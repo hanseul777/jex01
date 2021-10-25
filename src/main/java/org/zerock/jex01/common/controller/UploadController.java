@@ -122,7 +122,7 @@ public class UploadController {
 
         String uploadPath = "/Users/hanseul/upload";
 
-        String folderName = makeFoldeer(uploadPath); //2021-09-07
+        String folderName = makeFolder(uploadPath); //2021-09-07
         
         log.info(multipartFile.getContentType()); // 파일의 타입이 이미지라면 -> thumnails 처리
         log.info(multipartFile.getOriginalFilename());
@@ -153,7 +153,7 @@ public class UploadController {
                 .build();
     }
 
-    private String makeFoldeer(String uploadPath) {
+    private String makeFolder(String uploadPath) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String str = simpleDateFormat.format(date); //2021-09-07
